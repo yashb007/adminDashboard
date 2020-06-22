@@ -1,4 +1,4 @@
-const dbConfig = require('../environments/index').db;
+const dbConfig = require('../enviornment/index').db;
 const sequelize = require("sequelize");
 
 let Sequelize;

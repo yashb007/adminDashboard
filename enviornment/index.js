@@ -3,8 +3,8 @@ module.exports = {
     db: {
         HOST: "localhost",
         USER: "root",
-        PASSWORD: "Admin@1234",
-        DB: "qMall_dev",
+        PASSWORD: "123@123",
+        DB: "Admin_s",
         dialect: "mysql",
         pool: {
             max: 5,
