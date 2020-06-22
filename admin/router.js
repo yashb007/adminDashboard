@@ -5,6 +5,6 @@ const Controller = require('./controller');
 
 
 router.post('/login', Controller.login);
-
+router.post('/seeder', Controller.seeder);
 
 module.exports = router;
