@@ -1,7 +1,7 @@
 const  passport = require('passport')
-const JwtStrategy = require('passport-jwt').Strategy,
-const  ExtractJwt = require('passport-jwt').ExtractJwt,
-const  AnonymousStrategy = require('passport-anonymous').Strategy,
+const  JwtStrategy = require('passport-jwt').Strategy,
+       ExtractJwt = require('passport-jwt').ExtractJwt,
+       AnonymousStrategy = require('passport-anonymous').Strategy
 
 const Admin = require('../admin/model')
 const Config = require('../enviornment/index')
