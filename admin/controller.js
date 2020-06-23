@@ -151,10 +151,10 @@ exports.update = (req, res) => {
     const _b = req.body;
     Admin.update({
         userName: _b.userName,
-        image: _b.image
+        
     }, {
         where: {
-            id: req.user.id,
+            id: _b.id,
         }
     })
         .then(u => {
