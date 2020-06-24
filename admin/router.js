@@ -5,14 +5,15 @@ const Controller = require('./controller');
 
 const AdminGuard = passport.authenticate('admin', {session: false});
 
+router.param('adminId', Controller.getAdminById)
+
 router.post('/login', Controller.login);
-router.post('/changePassword',  Controller.changePassword);
-router.post('/forgotPassword', Controller.forgotPassword);
+router.post('/changePassword/:adminId',AdminGuard,  Controller.changePassword);
 router.post('/seeder', Controller.seeder);
 router.post('/add',AdminGuard, Controller.add);
-router.post('/delete',  Controller.delete);
-router.get('/get',AdminGuard,  Controller.get);
-router.post('/update',  Controller.update);
+router.post('/delete/:adminId', AdminGuard, Controller.delete);
+router.get('/get',AdminGuard,AdminGuard,  Controller.get);
+router.post('/update/:adminId',AdminGuard,  Controller.update);
 
 
 module.exports = router;

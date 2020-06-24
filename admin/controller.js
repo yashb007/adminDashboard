@@ -3,6 +3,27 @@ const sequelize = require('sequelize');
 const Auth = require('../services/auth.services')
 const Admin = require('./model');
 const Config = require('../enviornment/index');
+
+
+
+exports.getAdminById = (req,res,next,id) => {
+    Admin.findOne({
+        where :{
+            id : id
+        }
+    }).then(admin => {
+        if( !admin){
+            return res.status(400).json({
+                error : "No admin  found in db"
+            })
+        }
+        req.profile = admin 
+        //res.json(req.profile)
+        next()
+    })
+}
+
+
 exports.login = (req, res) => {
     try {
         const _b = req.body;
@@ -23,6 +44,7 @@ exports.login = (req, res) => {
                     } else {
                        const auth = Auth.encode(u.id);
                        const token = Auth.decode(auth)
+                       
                         res.status(200).json({
                             data: u,
                             auth: auth,
@@ -85,8 +107,6 @@ exports.add = (req, res) => {
             password: bcrypt.hashSync(_b.password, 0)
         })
             .then(u => {
-                // mail the email and password
-               // Mailer(_b);
                 res.status(200).json({status: true});
             })
             .catch(err => {
@@ -100,10 +120,10 @@ exports.add = (req, res) => {
 };
 
 exports.delete = (req, res) => {
+    const _b = req.body
     try {
-        const _b = req.body;
         Admin.destroy({
-            where: {email: _b.email}
+            where: {email: req.profile.email}
         })
             .then(u => {
                 res.status(200).json({status: true});
@@ -151,10 +171,10 @@ exports.update = (req, res) => {
     const _b = req.body;
     Admin.update({
         userName: _b.userName,
-        
+        email:_b.email
     }, {
         where: {
-            id: _b.id,
+            id: req.profile.id,
         }
     })
         .then(u => {
@@ -179,48 +199,11 @@ exports.changePassword = (req, res) => {
             password: _b.password,
         }, {
             where: {
-                id: req.user.id,
+                id: req.profile.id,
             }
         })
             .then(u => {
                 res.status(200).json({status: true});
-            })
-            .catch(err => {
-                console.error(err);
-                res.status(400).json({status: false});
-            });
-    }
-};
-
-exports.forgotPassword = (req, res) => {
-    const _b = req.body;
-    if (!_b.email || typeof _b.email !== 'string') {
-        res.status(400).json({
-            status: false,
-            message: 'Email must be a string'
-        });
-    } else {
-        Admin.findOne(
-            {
-                where: {
-                    email: _b.email
-                }
-            }
-        )
-            .then(u => {
-                if (!u) {
-                    res.status(400).json({
-                        status: false,
-                        message: 'email not found'
-                    });
-                } else {
-                    // send email with auth
-                    // send the auth back to /changePassword to reset password
-                //     const auth = Auth.encode(u.id);
-                //     Mailer(auth);
-                //     res.status(200).json({status: true});
-                 res.json("Successfull route")    
-            }
             })
             .catch(err => {
                 console.error(err);
