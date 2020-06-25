@@ -6,7 +6,7 @@ const Config = require('../enviornment/index');
 
 
 exports.getSellerById = (req,res,next,id) => {
-    User.findOne({
+    Seller.findOne({
         where :{
             id : id
         }
@@ -45,10 +45,10 @@ exports.add = (req, res) => {
     }
 };
 
-exports.delete = (req, res) => {
+exports.delete = (req,res) => {
     const _b = req.body
     try {
-        User.destroy({
+        Seller.destroy({
             where: {email: req.profile.email}
         })
             .then(u => {
@@ -64,15 +64,14 @@ exports.delete = (req, res) => {
     }
 };
 
-exports.get = (req, res) => {
+exports.get = (req,res) => {
     const _b = req.body;
-
     const opts = {where: {}, attributes: {exclude: ['password']}};
     if (+_b.offset) opts.offset = +_b.offset;
     if (+_b.limit) opts.limit = +_b.limit;
     if (_b.keyword) opts.where.userName = {[sequelize.Op.like]: `%${_b.keyword}%`};
 
-    User.findAll(opts)
+    Seller.findAll(opts)
         .then(u => {
             if (!u) {
                 res.status(400).json({
