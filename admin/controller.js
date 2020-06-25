@@ -22,7 +22,7 @@ exports.getAdminById = (req,res,next,id) => {
         next()
     })
 }
-
+c
 
 exports.login = (req, res) => {
     try {
