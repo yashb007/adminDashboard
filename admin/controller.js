@@ -4,24 +4,28 @@ const Auth = require('../services/auth.services')
 const Admin = require('./model');
 const Config = require('../enviornment/index');
 
-
-
 exports.getAdminById = (req,res,next,id) => {
-    Admin.findOne({
-        where :{
-            id : id
-        }
-    }).then(admin => {
-        if( !admin){
-            return res.status(400).json({
-                error : "No admin  found in db"
-            })
-        }
-        req.profile = admin 
-        //res.json(req.profile)
-        next()
-    })
-}
+    try{
+        Admin.findOne({
+            where :{
+                id : id
+            }
+        }).then(admin => {
+            if(!admin){
+                return res.status(400).json({  
+                    error : "No admin  found in db"
+                })
+            }
+            req.profile = admin;
+            
+            next();
+        })
+    }
+    catch(err) {
+        console.error(err);
+        res.status(400).json({status: false});
+    }
+};
 
 
 exports.login = (req, res) => {

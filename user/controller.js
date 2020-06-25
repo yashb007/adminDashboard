@@ -6,21 +6,27 @@ const Config = require('../enviornment/index');
 
 
 exports.getUserById = (req,res,next,id) => {
-    User.findOne({
-        where :{
-            id : id
-        }
-    }).then((err,user) => {
-        if(err || !user){
-            return res.status(400).json({
-                error : "No user  found in db"
-            })
-        }
-        req.profile = user;
-        
-        next();
-    })
-}
+    try{
+        User.findOne({
+            where :{
+                id : id
+            }
+        }).then(user => {
+            if(!user){
+                return res.status(400).json({  
+                    error : "No user  found in db"
+                })
+            }
+            req.profile = user;
+            
+            next();
+        })
+    }
+    catch(err) {
+        console.error(err);
+        res.status(400).json({status: false});
+    }
+};
 
 exports.add = (req, res) => {
     try {
@@ -48,8 +54,8 @@ exports.add = (req, res) => {
 exports.delete = (req, res) => {
     const _b = req.body
     try {
-        Seller.destroy({
-            where: {email: req.profile.email}
+        User.destroy({
+            where: {id: req.profile.id}
         })
             .then(u => {
                 res.status(200).json({status: true});
@@ -72,7 +78,7 @@ exports.get = (req, res) => {
     if (+_b.limit) opts.limit = +_b.limit;
     if (_b.keyword) opts.where.userName = {[sequelize.Op.like]: `%${_b.keyword}%`};
 
-    Seller.findAll(opts)
+    User.findAll(opts)
         .then(u => {
             if (!u) {
                 res.status(400).json({
@@ -91,3 +97,20 @@ exports.get = (req, res) => {
             res.status(400).json({status: false});
         });
     }    
+
+    
+    exports.updateStatus= (req,res) => {
+        User.update({
+            Status: !req.profile.Status
+        },{
+            where:{
+                email:req.profile.email
+            }
+        }).then(u => {
+            res.status(200).json({status: true, data: u});
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(400).json({status: false});
+        });
+    }

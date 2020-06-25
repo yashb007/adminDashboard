@@ -6,21 +6,27 @@ const Config = require('../enviornment/index');
 
 
 exports.getSellerById = (req,res,next,id) => {
-    Seller.findOne({
-        where :{
-            id : id
-        }
-    }).then((err,seller) => {
-        if(err || !seller){
-            return res.status(400).json({
-                error : "No seller  found in db"
-            })
-        }
-        req.profile = seller;
-        
-        next();
-    })
-}
+    try{
+        Seller.findOne({
+            where :{
+                id : id
+            }
+        }).then(seller => {
+            if(!seller){
+                return res.status(400).json({  
+                    error : "No seller found in db"
+                })
+            }
+            req.profile = seller;
+            
+            next();
+        })
+    }
+    catch(err) {
+        console.error(err);
+        res.status(400).json({status: false});
+    }
+};
 
 exports.add = (req, res) => {
     try {
@@ -90,3 +96,35 @@ exports.get = (req,res) => {
             res.status(400).json({status: false});
         });
     }    
+
+    exports.updateStatus= (req,res) => {
+        Seller.update({
+            Status: !req.profile.Status
+        },{
+            where:{
+                email:req.profile.email
+            }
+        }).then(u => {
+            res.status(200).json({status: true, data: u});
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(400).json({status: false});
+        });
+    }
+
+    exports.updateVerify= (req,res) => {
+        Seller.update({
+            Verify: !req.profile.Verify
+        },{
+            where:{
+                email:req.profile.email
+            }
+        }).then(u => {
+            res.status(200).json({status: true, data: u});
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(400).json({status: false});
+        });
+    }
