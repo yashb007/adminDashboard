@@ -11,6 +11,7 @@ app.use('/admin', require('./admin/router'));
 app.use('/user', require('./user/router'));
 app.use('/seller', require('./seller/router'));
 app.use('/language', require('./Language/router'));
+app.use('/topup', require('./TopUp/router'));
 
 
 const port = process.env.port || 3000;
