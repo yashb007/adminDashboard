@@ -15,6 +15,7 @@ app.use('/topup', require('./TopUp/router'));
 app.use('/package', require('./Package/router'));
 app.use('/country', require('./Country/router'));
 app.use('/governorate', require('./Governorate/router'));
+app.use('/area', require('./Area/router'));
 
 
 const port = process.env.port || 3000;
