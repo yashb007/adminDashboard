@@ -1,23 +1,23 @@
 const bcrypt = require('bcrypt');
 const sequelize = require('sequelize');
-const TopUp = require('./model');
+const Package = require('./model');
 const Config = require('../enviornment/index');
 
 
 
-exports.getTopUpById = (req,res,next,id) => {
+exports.getPackageById = (req,res,next,id) => {
     try{
-        TopUp.findOne({
+        Package.findOne({
             where :{
                 id : id
             }
-        }).then(top => {
-            if(!top){
+        }).then(pack => {
+            if(!pack){
                 return res.status(400).json({  
-                    error : "No topup found in db"
+                    error : "No Package found in db"
                 })
             }
-            req.profile = top;
+            req.profile = pack;
             
             next();
         })
@@ -31,10 +31,12 @@ exports.getTopUpById = (req,res,next,id) => {
 exports.add = (req, res) => {
     try {
         const _b = req.body;
-        TopUp.create({
+        Package.create({
             Name: _b.Name,
             Price : _b.Price,
             Coins:_b.Coins,
+            Duration:_b.Duration,
+            Refferal:_b.Refferal
         })
             .then(u => {
                 res.status(200).json({status: true});
@@ -49,15 +51,15 @@ exports.add = (req, res) => {
     }
 };
 
-
-
 exports.edit = (req, res) => {
     try {
         const _b = req.body;
-        TopUp.update({
+        Package.update({
             Name: _b.Name,
             Price:_b.Price,
-            Coins:_b.Coins
+            Coins:_b.Coins,
+            Refferal:_b.Refferal,
+            Duration:_b.Duration
         },{
             where : {
             id : req.profile.id
@@ -78,7 +80,7 @@ exports.edit = (req, res) => {
 exports.delete = (req,res) => {
     const _b = req.body
     try {
-        TopUp.destroy({
+        Package.destroy({
             where: {Name: req.profile.Name}
         })
             .then(u => {
@@ -101,12 +103,12 @@ exports.get = (req,res) => {
     if (+_b.limit) opts.limit = +_b.limit;
     if (_b.keyword) opts.where.Name = {[sequelize.Op.like]: `%${_b.keyword}%`};
 
-    TopUp.findAll(opts)
+    Package.findAll(opts)
         .then(u => {
             if (!u) {
                 res.status(400).json({
                     status: false,
-                    message: 'TopUp not found'
+                    message: 'Package not found'
                 });
             } else {
                 res.status(200).json({
@@ -122,7 +124,7 @@ exports.get = (req,res) => {
     }    
 
     exports.updateStatus= (req,res) => {
-        TopUp.update({
+        Package.update({
             Status: !req.profile.Status
         },{
             where:{
