@@ -18,6 +18,7 @@ app.use('/governorate', require('./Governorate/router'));
 app.use('/area', require('./Area/router'));
 app.use('/banner', require('./Banner/router'));
 app.use('/address', require('./Address/router'));
+app.use('/offer', require('./Offer/router'));
 
 
 const port = process.env.port || 8029;
