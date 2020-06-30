@@ -1,6 +1,7 @@
 const sequelize = require('sequelize');
 const Sequelize = require('../services/sequelize.service').connection();
 const Language = require('../Language/model')
+const Governorate = require('../Governorate/model')
 const Area = Sequelize.define('Area',
     {
         id: {
@@ -30,6 +31,9 @@ const Area = Sequelize.define('Area',
         indexes: [{unique: true, fields: ['Name']}]
     }
 );
+
+Governorate.hasMany(Area);
+Area.belongsTo(Governorate);
 
 
 Language.hasMany(Area);

@@ -3,7 +3,7 @@ const router = require('express').Router();
 const Controller = require('./controller');
 
 
-router.param('categoryId', Controller.getcategoryById)
+router.param('categoryId', Controller.getCategoryById)
 
 router.post('/add', Controller.add);
 router.post('/delete/:categoryId', Controller.delete);

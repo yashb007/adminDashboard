@@ -1,5 +1,5 @@
 
-const Sequelize = require('../../services/sequelize.service').connection();
+const Sequelize = require('../services/sequelize.service').connection();
 const sequelize = require('sequelize');
 const Language = require('../Language/model')
 const Category = Sequelize.define('Category', {
