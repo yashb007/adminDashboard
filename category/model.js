@@ -1,7 +1,7 @@
 
 const Sequelize = require('../../services/sequelize.service').connection();
 const sequelize = require('sequelize');
-
+const Language = require('../Language/model')
 const Category = Sequelize.define('Category', {
     id: {
         type: sequelize.UUID,
@@ -21,5 +21,10 @@ const Category = Sequelize.define('Category', {
 });
 
 
+Language.hasMany(Category);
+Category.belongsTo(Language);
+
+Category.hasMany(Category, {as: 'child', foreignKey: 'CategoryId'});
+Category.belongsTo(Category, {as: 'parent', foreignKey: 'CategoryId'});
 
 module.exports = Category;

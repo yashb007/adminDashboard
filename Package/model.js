@@ -1,6 +1,6 @@
 const sequelize = require('sequelize');
 const Sequelize = require('../services/sequelize.service').connection();
-
+const Language = require('../Language/model')
 const Package = Sequelize.define('Package',
     {
         id: {
@@ -38,5 +38,9 @@ const Package = Sequelize.define('Package',
         indexes: [{unique: true, fields: ['Name']}]
     }
 );
+
+
+Language.hasMany(Package);
+Package.belongsTo(Language);
 
 module.exports = Package;

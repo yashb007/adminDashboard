@@ -1,6 +1,6 @@
 const sequelize = require('sequelize');
 const Sequelize = require('../services/sequelize.service').connection();
-
+const Language = require('../Language/model')
 const Governorate = Sequelize.define('Governorate',
     {
         id: {
@@ -22,5 +22,9 @@ const Governorate = Sequelize.define('Governorate',
         indexes: [{unique: true, fields: ['Name']}]
     }
 );
+
+
+Language.hasMany(Governorate);
+Governorate.belongsTo(Language);
 
 module.exports = Governorate;

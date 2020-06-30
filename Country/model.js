@@ -1,6 +1,6 @@
 const sequelize = require('sequelize');
 const Sequelize = require('../services/sequelize.service').connection();
-
+const Language = require('../Language/model')
 const Country = Sequelize.define('Country',
     {
         id: {
@@ -22,5 +22,9 @@ const Country = Sequelize.define('Country',
         indexes: [{unique: true, fields: ['Name']}]
     }
 );
+
+Language.hasMany(Country);
+Country.belongsTo(Language);
+
 
 module.exports = Country;

@@ -1,6 +1,6 @@
 const sequelize = require('sequelize');
 const Sequelize = require('../services/sequelize.service').connection();
-
+const Language = require('../Language/model')
 const Banner = Sequelize.define('Banner',
     {
         id: {
@@ -22,5 +22,10 @@ const Banner = Sequelize.define('Banner',
         indexes: [{unique: true, fields: ['Name']}]
     }
 );
+
+
+Language.hasMany(Banner);
+Banner.belongsTo(Language);
+
 
 module.exports = Banner;
