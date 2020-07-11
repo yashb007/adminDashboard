@@ -24,7 +24,7 @@ app.use('/offer', require('./Offer/router'));
 app.use('/posts', require('./Posts/router'));
 app.use('/category', require('./category/router'));
 app.use('/product', require('./Product/router'));
-
+app.use('/media', require('./media/router'));
 
 const port = process.env.port || 8029;
 app.listen(port ,()=> {
