@@ -4,7 +4,7 @@ const Promisify = require('util').promisify;
 const uuid = require('uuid').v4;
 const path = require('path');
 const mime = require('mime');
-const Config = require('../environment/index');
+const Config = require('../enviornment/index');
 const baseUrl = '/media/download/';
 
 exports.add = (req, res) => {
