@@ -2,6 +2,8 @@ require('dotenv').config()
 const express = require('express')
 
 const app = express();
+const cors = require("cors");
+app.use(cors());
 require('./services/sequelize.service').init();
 require('./services/passport.services')();
 app.use(express.json());
@@ -22,7 +24,7 @@ app.use('/offer', require('./Offer/router'));
 app.use('/posts', require('./Posts/router'));
 app.use('/category', require('./category/router'));
 app.use('/product', require('./Product/router'));
-
+app.use('/media', require('./media/router'));
 
 const port = process.env.port || 8029;
 app.listen(port ,()=> {
