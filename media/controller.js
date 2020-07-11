@@ -1,4 +1,4 @@
-const Media = require('./media.model');
+const Media = require('./model');
 const fs = require('fs');
 const Promisify = require('util').promisify;
 const uuid = require('uuid').v4;
