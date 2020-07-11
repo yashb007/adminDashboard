@@ -2,6 +2,8 @@ require('dotenv').config()
 const express = require('express')
 
 const app = express();
+const cors = require("cors");
+app.use(cors());
 require('./services/sequelize.service').init();
 require('./services/passport.services')();
 app.use(express.json());
