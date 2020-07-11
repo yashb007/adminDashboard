@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const controller = require('./media.controller');
+const controller = require('./controller');
 const multer = require('../services/multer.service');
 
 router.post('/add', multer.array('media'), controller.add);
