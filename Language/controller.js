@@ -101,16 +101,13 @@ exports.get = (req,res) => {
     Language.findAll(opts)
         .then(u => {
             if (!u) {
-                res.status(400).json({
+             return   res.status(400).json({
                     status: false,
                     message: 'Lang not found'
                 });
-            } else {
-                res.status(200).json({
-                    status: true,
-                    data: u
-                });
-            }
+            } 
+                res.json({u})
+            
         })
         .catch(err => {
             console.error(err);

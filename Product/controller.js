@@ -32,7 +32,7 @@ exports.add = (req, res) => {
         const _b = req.body;
         Product.create({
           name:_b.name,
-          Description:_b.Description,
+          description:_b.description,
           Price:_b.Price
         })
             .then(u => {
@@ -54,7 +54,7 @@ exports.edit = (req, res) => {
         const _b = req.body;
         Product.update({
             name:_b.name,
-            Description:_b.Description,
+            description:_b.description,
             Price:_b.Price
         })
             .then(u => {

@@ -32,7 +32,11 @@ exports.add = (req, res) => {
     try {
         const _b = req.body;
         Post.create({
-          
+          Title:_b.Title,
+          Description:_b.Description,
+          Price:_b.Price,
+          StartingPrice:_b.StartingPrice,
+          MaximumPrice:_b.MaximumPrice
         })
             .then(u => {
                 res.status(200).json({status: true});
@@ -51,7 +55,11 @@ exports.edit = (req, res) => {
     try {
         const _b = req.body;
         Post.update({
-          
+            Title:_b.Title,
+            Description:_b.Description,
+            Price:_b.Price,
+            StartingPrice:_b.StartingPrice,
+            MaximumPrice:_b.MaximumPrice
         })
             .then(u => {
                 res.status(200).json({status: true});

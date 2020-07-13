@@ -20,7 +20,7 @@ const Post = Sequelize.define('Post',
             allowNull: false
         },
         StartingPrice:{
-            type:sequelize.BOOLEAN,
+            type:sequelize.INTEGER,
             allowNull: false
         },
         Status:{

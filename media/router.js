@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const controller = require('./media.controller');
-const multer = require('../services/multer.service');
+const controller = require('./controller');
+const multer = require('../services/multer.services');
 
 router.post('/add', multer.array('media'), controller.add);
 router.post('/update', multer.single('media'), controller.update);

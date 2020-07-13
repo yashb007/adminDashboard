@@ -32,7 +32,9 @@ exports.add = (req, res) => {
     try {
         const _b = req.body;
         Banner.create({
-            Name: _b.Name
+            Name: _b.Name,
+            MediumId: _b.MediaId,
+            LanguageId: _b.LanguageId,
         })
             .then(u => {
                 res.status(200).json({status: true});

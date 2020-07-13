@@ -1,7 +1,7 @@
 const multer = require('multer');
 const uuid = require('uuid').v4;
 
-const Config = require('../environments/index');
+const Config = require('../enviornment/index');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
