@@ -1,23 +1,23 @@
-const bcrypt = require('bcrypt');
 const sequelize = require('sequelize');
-const Banner = require('./model');
+const Brand = require('./model');
 const Config = require('../enviornment/index');
+const Media = require('../media/model')
+const Language = require('../Language/model')
 
 
-
-exports.getBannerById = (req,res,next,id) => {
+exports.getBrandById = (req,res,next,id) => {
     try{
-        Banner.findOne({
+        Brand.findOne({
             where :{
                 id : id
             }
-        }).then(banner => {
-            if(!banner){
+        }).then(brand => {
+            if(!brand){
                 return res.status(400).json({  
-                    error : "No Banner found in db"
+                    error : "No Brand found in db"
                 })
             }
-            req.profile = banner;
+            req.profile = brand;
             
             next();
         })
@@ -31,10 +31,10 @@ exports.getBannerById = (req,res,next,id) => {
 exports.add = (req, res) => {
     try {
         const _b = req.body;
-        Banner.create({
-            Name: _b.Name,
-            MediumId: _b.MediumId,
-            LanguageId: _b.LanguageId,
+        Brand.create({
+          name:_b.name,
+          LanguageId:_b.LanguageId,
+          MediumId:_b.MediumId
         })
             .then(u => {
                 res.status(200).json({status: true});
@@ -49,17 +49,16 @@ exports.add = (req, res) => {
     }
 };
 
+
 exports.edit = (req, res) => {
     try {
         const _b = req.body;
-        Banner.update({
-            Name: _b.Name,
-            MediumId: _b.MediumId,
-            LanguageId: _b.LanguageId,
-        },{
-            where : {
-            id : req.profile.id
-        }})
+        Brand.update({
+          name:_b.name,
+          LanguageId:_b.LanguageId,
+          MediumId:_b.MediumId
+
+        })
             .then(u => {
                 res.status(200).json({status: true});
             })
@@ -73,11 +72,14 @@ exports.edit = (req, res) => {
     }
 };
 
+
 exports.delete = (req,res) => {
     const _b = req.body
     try {
-        Banner.destroy({
-            where: {Name: req.profile.Name}
+        Brand.destroy({
+            where: {
+                 name:req.profile.name
+                }
         })
             .then(u => {
                 res.status(200).json({status: true});
@@ -97,14 +99,14 @@ exports.get = (req,res) => {
     const opts = {where: {}, attributes: {}};
     if (+_b.offset) opts.offset = +_b.offset;
     if (+_b.limit) opts.limit = +_b.limit;
-    if (_b.keyword) opts.where.Name = {[sequelize.Op.like]: `%${_b.keyword}%`};
+    if (_b.keyword) opts.where.name = {[sequelize.Op.like]: `%${_b.keyword}%`};
 
-    Banner.findAll(opts)
+    Brand.findAll(opts)
         .then(u => {
             if (!u) {
                 res.status(400).json({
                     status: false,
-                    message: 'Banner not found'
+                    message: 'Brand not found'
                 });
             } else {
                 res.status(200).json({
@@ -120,11 +122,11 @@ exports.get = (req,res) => {
     }    
 
 exports.updateStatus= (req,res) => {
-        Banner.update({
+        Brand.update({
             Status: !req.profile.Status
         },{
             where:{
-                Name:req.profile.Name
+                name:req.profile.name
             }
         }).then(u => {
             res.status(200).json({status: true, data: u});
@@ -134,5 +136,3 @@ exports.updateStatus= (req,res) => {
             res.status(400).json({status: false});
         });
     }
-
-    

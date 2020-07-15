@@ -2,7 +2,7 @@ const sequelize = require('sequelize');
 const Sequelize = require('../../../services/sequelize.service').connection();
 
 const ActivityModel = require('../activity.model')
-const UserModel = require('../../model').model
+const UserModel = require('../../model')
 
 let models = {}
 

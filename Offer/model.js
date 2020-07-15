@@ -17,8 +17,9 @@ const Offer = Sequelize.define('Offer',
             allowNull: false
         },
         Validity:{
-            type:sequelize.INTEGER ,
-            allowNull: false
+            type:sequelize.DATE,
+            allowNull: true,
+            defaultValue:'2015-02-12 15:00:00'
         },
         Status:{
             type:sequelize.BOOLEAN,

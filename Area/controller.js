@@ -34,7 +34,9 @@ exports.add = (req, res) => {
         Area.create({
             Name: _b.Name,
             PinCode:_b.PinCode,
-            AreaCode:_b.AreaCode
+            AreaCode:_b.AreaCode,
+            LanguageId:_b.LanguageId,
+            GovernorateId:_b.GovernorateId
         })
             .then(u => {
                 res.status(200).json({status: true});
@@ -55,7 +57,9 @@ exports.edit = (req, res) => {
         Area.update({
             Name: _b.Name,
             PinCode:_b.PinCode,
-            AreaCode:_b.AreaCode
+            AreaCode:_b.AreaCode,
+            LanguageId:_b.LanguageId,
+            GovernorateId:_b.GovernorateId
         },{
             where : {
             id : req.profile.id

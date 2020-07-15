@@ -1,6 +1,6 @@
 const OtherAds = require('./otherAds.model').model
 const { findParticularValue } = require('../StaticValues/staticValues.controller')
-const User = require('../model').model
+const User = require('../model')
 
 exports.addAdsBulk = (req, res) => {
     const _b = req.body

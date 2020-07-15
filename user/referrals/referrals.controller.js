@@ -1,4 +1,4 @@
-const User = require('../model').model
+const User = require('../model')
 
 // Functions
 const parentTopUp = (amount, id) => {

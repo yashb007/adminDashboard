@@ -35,6 +35,8 @@ exports.add = (req, res) => {
             Name: _b.Name,
             Price : _b.Price,
             Coins:_b.Coins,
+            languageId:_b.LanguageId,
+            MediumId:_b.MediumId
         })
             .then(u => {
                 res.status(200).json({status: true});
@@ -57,7 +59,10 @@ exports.edit = (req, res) => {
         TopUp.update({
             Name: _b.Name,
             Price:_b.Price,
-            Coins:_b.Coins
+            Coins:_b.Coins,      
+            languageId:_b.LanguageId,
+            MediumId:_b.MediumId
+      
         },{
             where : {
             id : req.profile.id

@@ -1,5 +1,5 @@
 const sequelize = require('sequelize');
-const User = require('./model').model;
+const User = require('./model');
 const Config = require('../enviornment/index');
 
 exports.getUserById = (req, res, next, id) => {
@@ -66,6 +66,29 @@ exports.add = async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(400).json({ error: err.message,status: false });
+    }
+};
+
+exports.edit = (req, res) => {
+    try {
+        const _b = req.body;
+        User.update({
+            email: _b.email,
+            Name: _b.Name,
+            DOB : _b.DOB,
+            PhoneNo:_b.PhoneNo,
+            password: bcrypt.hashSync(_b.password, 0)
+        })
+            .then(u => {
+                res.status(200).json({status: true});
+            })
+            .catch(err => {
+                console.error(err);
+                res.status(400).json({status: false});
+            });
+    } catch (err) {
+        console.error(err);
+        res.status(400).json({status: false});
     }
 };
 

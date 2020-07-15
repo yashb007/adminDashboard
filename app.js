@@ -25,6 +25,7 @@ app.use('/posts', require('./Posts/router'));
 app.use('/category', require('./category/router'));
 app.use('/product', require('./Product/router'));
 app.use('/media', require('./media/router'));
+app.use('/brand', require('./Brand/router'));
 
 app.get('*', (req, res) => res.json({working: "fine"}))
 

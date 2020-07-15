@@ -53,7 +53,7 @@ exports.login = (req, res) => {
                             data: u,
                             auth: auth,
                             token,
-                            _b,
+                            
                             status: true,
                            
                         });
@@ -93,7 +93,7 @@ exports.seeder = function (req, res) {
         }
     })()
         .then(u => {
-            if (!u) throw new Error();
+           
             res.status(200).json({status: true});
         })
         .catch(err => {

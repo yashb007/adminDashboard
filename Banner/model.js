@@ -1,6 +1,8 @@
 const sequelize = require('sequelize');
 const Sequelize = require('../services/sequelize.service').connection();
 const Language = require('../Language/model')
+const Media = require('../media/model')
+const Product = require('../Product/model')
 const Banner = Sequelize.define('Banner',
     {
         id: {
@@ -12,6 +14,10 @@ const Banner = Sequelize.define('Banner',
             type: sequelize.STRING,
             allowNull: false
         },
+        date: {
+            type: sequelize.DATE
+        },
+        
         Status:{
             type:sequelize.BOOLEAN,
             defaultValue:false
@@ -24,8 +30,15 @@ const Banner = Sequelize.define('Banner',
 );
 
 
-Language.hasMany(Banner);
-Banner.belongsTo(Language);
+
+
+oTm(Language, Banner);
+oTm(Media, Banner);
 
 
 module.exports = Banner;
+
+function oTm(A, B) {
+    A.hasMany(B);
+    B.belongsTo(A);
+}

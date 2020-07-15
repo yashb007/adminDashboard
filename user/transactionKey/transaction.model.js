@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../../services/sequelize.service.js').connection()
 
-const User = require('../model').model
+const User = require('../model')
 
 const options = {
     id: {

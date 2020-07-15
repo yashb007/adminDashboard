@@ -1,6 +1,7 @@
 const sequelize = require('sequelize');
 const Sequelize = require('../services/sequelize.service').connection();
-
+const User = require('../user/model')
+const Area = require('../Area/model')
 const Address = Sequelize.define('Address',
     {
         id: {
@@ -61,5 +62,12 @@ const Address = Sequelize.define('Address',
         indexes: [{unique: true, fields: ['AddressTitle']}]
     }
 );
+
+
+User.hasMany(Address);
+Address.belongsTo(User);
+
+// Area.hasMany(Address);
+// Address.belongsTo(Area);
 
 module.exports = Address;

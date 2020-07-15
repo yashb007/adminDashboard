@@ -1,6 +1,10 @@
 
 const Sequelize = require('../services/sequelize.service').connection();
 const sequelize = require('sequelize');
+const Language = require('../Language/model')
+const Media = require('../media/model')
+const Category = require('../category/model')
+
 
 const Product = Sequelize.define('Product', {
     id: {
@@ -31,4 +35,15 @@ const Product = Sequelize.define('Product', {
 
 
 
+oTm(Language, Product);
+oTm(Media, Product);
+oTm(Category, Product);
+
+
 module.exports = Product;
+
+
+function oTm(A, B) {
+    A.hasMany(B);
+    B.belongsTo(A);
+}

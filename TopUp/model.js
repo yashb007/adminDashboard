@@ -1,6 +1,7 @@
 const sequelize = require('sequelize');
 const Sequelize = require('../services/sequelize.service').connection();
 const Language = require('../Language/model')
+const Media = require('../media/model')
 const TopUp = Sequelize.define('TopUp',
     {
         id: {
@@ -34,5 +35,9 @@ const TopUp = Sequelize.define('TopUp',
 
 Language.hasMany(TopUp);
 TopUp.belongsTo(Language);
+
+Media.hasOne(TopUp);
+TopUp.belongsTo(Media);
+
 
 module.exports = TopUp;

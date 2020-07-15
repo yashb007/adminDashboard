@@ -1,5 +1,5 @@
 const TransactionKey = require('./transaction.model')
-const User = require('../model').model
+const User = require('../model')
 const Sequelize = require('sequelize')
 
 exports.setKey = (req, res) => {
