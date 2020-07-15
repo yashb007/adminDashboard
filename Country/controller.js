@@ -32,7 +32,8 @@ exports.add = (req, res) => {
     try {
         const _b = req.body;
         Country.create({
-            Name: _b.Name
+            Name: _b.Name,
+            LanguageId:_b.LanguageId
         })
             .then(u => {
                 res.status(200).json({status: true});
@@ -51,7 +52,8 @@ exports.edit = (req, res) => {
     try {
         const _b = req.body;
         Country.update({
-            Name: _b.Name
+            Name: _b.Name,
+            LanguageId:_b.LanguageId
         },{
             where : {
             id : req.profile.id

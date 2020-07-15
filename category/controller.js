@@ -1,7 +1,8 @@
 const sequelize = require('sequelize');
 const Category = require('./model');
 const Config = require('../enviornment/index');
-
+const Media = require('../media/model')
+const Language = require('../Language/model')
 
 
 exports.getCategoryById = (req,res,next,id) => {
@@ -31,7 +32,10 @@ exports.add = (req, res) => {
     try {
         const _b = req.body;
         Category.create({
-          name:_b.name
+          name:_b.name,
+          LanguageId:_b.LanguageId,
+          CategoryId:_b.CategoryId,
+         // MediaId:_b.MediaId
         })
             .then(u => {
                 res.status(200).json({status: true});

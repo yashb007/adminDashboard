@@ -1,5 +1,8 @@
 const sequelize = require('sequelize');
 const Sequelize = require('../services/sequelize.service').connection();
+const Media = require('../media/model')
+const  Language = require('../Language/model')
+const Category = require('../category/model') 
 
 const Post = Sequelize.define('Post',
     {
@@ -35,10 +38,29 @@ const Post = Sequelize.define('Post',
             type:sequelize.BOOLEAN,
             defaultValue:true
         },
+        placeForBidding:{
+            type:sequelize.BOOLEAN,
+            defaultValue:true
+        },
+        completionTime:{
+            type:sequelize.INTEGER,
+            
+        }
+
     },
     {
         indexes: [{unique: true, fields: ['Title']}]
     }
 );
 
+oTm(Language, Post);
+oTm(Media, Post);
+oTm(Category, Post);
+
 module.exports = Post;
+
+
+function oTm(A, B) {
+    A.hasMany(B);
+    B.belongsTo(A);
+}

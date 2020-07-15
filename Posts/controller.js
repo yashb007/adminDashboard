@@ -36,7 +36,11 @@ exports.add = (req, res) => {
           Description:_b.Description,
           Price:_b.Price,
           StartingPrice:_b.StartingPrice,
-          MaximumPrice:_b.MaximumPrice
+          MaximumPrice:_b.MaximumPrice,
+          completionTime:_b.completionTime,
+          LanguageId:_b.LanguageId,
+          MediumId:_b.MediumId,
+          CategoryId:_b.CategoryId
         })
             .then(u => {
                 res.status(200).json({status: true});
@@ -59,7 +63,11 @@ exports.edit = (req, res) => {
             Description:_b.Description,
             Price:_b.Price,
             StartingPrice:_b.StartingPrice,
-            MaximumPrice:_b.MaximumPrice
+            MaximumPrice:_b.MaximumPrice,
+            completionTime:_b.completionTime,
+            LanguageId:_b.LanguageId,
+            MediumId:_b.MediumId,
+            CategoryId:_b.CategoryId
         })
             .then(u => {
                 res.status(200).json({status: true});

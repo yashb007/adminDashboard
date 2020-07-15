@@ -35,7 +35,7 @@ exports.add = (req, res) => {
             Name: _b.Name,
             PinCode:_b.PinCode,
             AreaCode:_b.AreaCode,
-            languageId:_b.LanguageId,
+            LanguageId:_b.LanguageId,
             GovernorateId:_b.GovernorateId
         })
             .then(u => {
@@ -58,7 +58,7 @@ exports.edit = (req, res) => {
             Name: _b.Name,
             PinCode:_b.PinCode,
             AreaCode:_b.AreaCode,
-            languageId:_b.LanguageId,
+            LanguageId:_b.LanguageId,
             GovernorateId:_b.GovernorateId
         },{
             where : {
