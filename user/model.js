@@ -2,6 +2,8 @@ const sequelize = require('sequelize');
 const Sequelize = require('../services/sequelize.service').connection();
 const bcrypt = require('bcrypt')
 
+const Media = require('../media/model')
+
 const options = {
     id: {
         type: sequelize.UUID,
@@ -146,7 +148,13 @@ const User = Sequelize.define('User',
     options,
     hooks
 );
-// oTm(Media, User, 'MediaId')
+oTm(Media, User, 'MediaId')
+
+function oTm(A, B, as) {
+    A.hasMany(B, { as: as });
+    B.belongsTo(A, { as: as });
+}
+
 
 // module.exports = User;
 
