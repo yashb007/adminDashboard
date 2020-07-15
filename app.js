@@ -26,6 +26,8 @@ app.use('/category', require('./category/router'));
 app.use('/product', require('./Product/router'));
 app.use('/media', require('./media/router'));
 
+app.get('*', (req, res) => res.json({working: "fine"}))
+
 const port = process.env.port || 8029;
 app.listen(port ,()=> {
     console.log(`Server is running at ${port}`)

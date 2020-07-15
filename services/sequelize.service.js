@@ -17,10 +17,10 @@ exports.init = () => {
             acquire: dbConfig.pool.acquire,
             idle: dbConfig.pool.idle
         },
-        logging: false
+        logging: console.log
     });
 
-    Sequelize.sync({alter: true, force: false});
+    Sequelize.sync({alter: false, force: false});
 
 }
 
