@@ -10,5 +10,6 @@ const router = require('express').Router()
 
 router.post('/fetchAllActivity', ActivityModelController.registerTable, ActivityController.fetchAllActivity)
 router.post('/fetchOtherAds', ActivityModelController.registerTable, ActivityController.fetchOtherAds)
+router.post('/seeder', ActivityModelController.registerTable, ActivityController.seedSomeActivityLog)
 
 module.exports = router

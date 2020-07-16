@@ -10,6 +10,8 @@ const ReferralsController = require('./referrals/referrals.router')
 const ActivityRouter = require('./activity log/activity.router')
 const BannerRouter = require('./banner/banner.router')
 const AppMenuRouter = require('./appMenu/appMenu.router')
+const MobileVerificationROuter = require('./mobileVerification/mobileVerification.router')
+const DashboardRouter = require('./dashboard/dashboard.router')
 
 
 router.param('userId', Controller.getUserById)
@@ -44,5 +46,11 @@ router.use('/Banner', BannerRouter)
 
 // AppMenu
 router.use('/AppMenu', AppMenuRouter)
+
+// OTP 
+router.use('/otp', MobileVerificationROuter)
+
+//Dashboard
+router.use('/dashboard', DashboardRouter)
 
 module.exports = router;

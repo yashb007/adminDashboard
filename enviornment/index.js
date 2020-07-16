@@ -1,10 +1,10 @@
 module.exports = {
-   
+
     db: {
         HOST: "localhost",
         USER: "root",
         PASSWORD: "Admin@1234",
-        // PASSWORD: "root",
+        PASSWORD: "root",
         DB: "Admin_s",
         dialect: "mysql",
         pool: {
@@ -24,5 +24,12 @@ module.exports = {
     },
     base: {
         url: 'localhost:8029/'
-    }
+    },
+    msg91: {
+        authkey: '249885A6FIqujm95eeb007eP1',
+        sender: 'LIVLMS',
+        route: '4',
+        country: '91',
+        api: 'https://api.msg91.com/api/v2/'
+    },
 };

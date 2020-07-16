@@ -8,7 +8,7 @@ let models = {}
 
 const defineAllModels = async (name) => {
     // Activity - User
-    const UserActivityModel = await Sequelize.define('a_' + name, ActivityModel.options, { freezeTableName: true })
+    const UserActivityModel = await Sequelize.define('a_' + name, ActivityModel.options, { ...ActivityModel.hooks,freezeTableName: true })
     // await Sequelize.sync({alter: false, force: false})
 
     await UserModel.hasMany(UserActivityModel, {

@@ -38,3 +38,20 @@ exports.fetchOtherAds = (req, res) => {
         })
         .catch(err => res.send(err))
 }
+
+exports.seedSomeActivityLog = (req, res) => {
+    const _b = req.body
+    req.Models.UserActivityModel.create({
+        message: _b.message,
+        milestone: _b.milestone,
+        coinsEarned: _b.coins,
+        category: _b.category,
+        targetId: _b.targetId,
+    })
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err => {
+        res.send(err)
+    })
+}
