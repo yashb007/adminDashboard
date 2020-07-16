@@ -8,6 +8,8 @@ const StaticDataRouter = require('./StaticValues/staticValues.router')
 const otherAdsController = require('./otherAds/otherAds.router')
 const ReferralsController = require('./referrals/referrals.router')
 const ActivityRouter = require('./activity log/activity.router')
+const BannerRouter = require('./banner/banner.router')
+const AppMenuRouter = require('./appMenu/appMenu.router')
 
 
 router.param('userId', Controller.getUserById)
@@ -36,5 +38,11 @@ router.use('/referrals', ReferralsController)
 
 // Activity 
 router.use('/activity', ActivityRouter)
+
+// Banner
+router.use('/Banner', BannerRouter)
+
+// AppMenu
+router.use('/AppMenu', AppMenuRouter)
 
 module.exports = router;

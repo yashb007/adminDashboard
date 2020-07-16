@@ -63,6 +63,7 @@ exports.matchKey = (req, res) => {
         
     })
     .then(values => {
+        if (values == null) throw new Error('No User Found')
         const json = values.toJSON()
         if (json.firstDigit === _b.firstDigit &&
             json.secondDigit === _b.secondDigit &&
@@ -79,6 +80,8 @@ exports.matchKey = (req, res) => {
             })
         }
     })
-    .catch(err => res.send(err.message))
+    .catch(err => res.send({
+        error: err.message
+    }))
 
 }

@@ -7,6 +7,7 @@ app.use(cors());
 require('./services/sequelize.service').init();
 require('./services/passport.services')();
 app.use(express.json());
+app.use(express.static(__dirname))
 
 
 app.use('/admin', require('./admin/router'));
@@ -27,7 +28,7 @@ app.use('/product', require('./Product/router'));
 app.use('/media', require('./media/router'));
 app.use('/brand', require('./Brand/router'));
 
-app.get('*', (req, res) => res.json({working: "fine"}))
+// app.get('*', (req, res) => res.json({working: "fine"}))
 
 const port = process.env.port || 8029;
 app.listen(port ,()=> {

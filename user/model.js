@@ -80,8 +80,11 @@ const options = {
     sellerId: {
         type: sequelize.UUID,
         defaultValue: sequelize.UUIDV4,
-
     },
+    verified: {
+        type: sequelize.BOOLEAN,
+        defaultValue: false,
+    }
 
 
 }
