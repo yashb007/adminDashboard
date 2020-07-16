@@ -106,7 +106,7 @@ exports.get = (req,res) => {
                     message: 'Lang not found'
                 });
             } 
-                res.json({u})
+                res.json({data:u,status:true})
             
         })
         .catch(err => {
