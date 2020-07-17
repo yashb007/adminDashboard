@@ -11,4 +11,7 @@ router.post('/delete/:langId', Controller.delete);
 router.post('/status/:langId', Controller.updateStatus);
 router.get('/get',  Controller.get);
 
+router.post('/getLanguageByName', Controller.getLanguageByName)
+router.post('/getLanguageByCode', Controller.getLanguageByCode)
+
 module.exports = router;

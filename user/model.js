@@ -14,7 +14,11 @@ const options = {
         type: sequelize.STRING,
         allowNull: false
     },
-    Name: {
+    name_en: {
+        type: sequelize.STRING,
+        allowNull: false
+    },
+    name_ar: {
         type: sequelize.STRING,
         allowNull: false
     },
@@ -28,7 +32,6 @@ const options = {
     },
     PhoneNo: {
         type: sequelize.STRING,
-
     },
     TotalPost: {
         type: sequelize.INTEGER,
@@ -55,12 +58,22 @@ const options = {
         type: sequelize.UUID,
         allowNull: true,
     },
-    username: {
+    username_en: {
+        type: sequelize.STRING,
+        allowNull: false,
+        unique: true,
+    },
+    username_ar: {
         type: sequelize.STRING,
         allowNull: false,
         unique: true,
     },
     balance: {
+        type: sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    overallEarning : {
         type: sequelize.INTEGER,
         allowNull: false,
         defaultValue: 0
@@ -85,8 +98,6 @@ const options = {
         type: sequelize.BOOLEAN,
         defaultValue: false,
     }
-
-
 }
 
 const hooks = {
@@ -94,56 +105,6 @@ const hooks = {
 
     beforeCreate: (record, options) => {
         record.dataValues.password = bcrypt.hashSync(record.dataValues.password, 0)
-        // const Media = require('../media/model')
-        // const User = Sequelize.define('User',
-        //     {
-        //         id: {
-        //             type: sequelize.UUID,
-        //             defaultValue: sequelize.UUIDV4,
-        //             primaryKey: true
-        //         },
-        //         email: {
-        //             type: sequelize.STRING,
-        //             allowNull: false
-        //         },
-        //         Name: {
-        //             type: sequelize.STRING,
-        //             allowNull: false
-        //         },
-        //         password: {
-        //             type: sequelize.STRING,
-        //             allowNull: false
-        //         },
-        //         DOB: {
-        //             type: sequelize.STRING,
-        //             allowNull: false
-        //         },
-        //         PhoneNo: {
-        //             type: sequelize.STRING,
-
-        //         },
-        //         TotalPost: {
-        //             type: sequelize.INTEGER,
-        //             defaultValue: 0
-        //         },
-        //         TotalBiding: {
-        //             type: sequelize.INTEGER,
-        //             defaultValue: 0
-        //         },
-        //         Status: {
-        //             type: sequelize.BOOLEAN,
-        //             defaultValue: false
-        //         },
-        //         wallet: {
-        //             type: sequelize.INTEGER,
-        //             defaultValue: 0
-        //         },
-
-        //     },
-        //     {
-        //         indexes: [{ unique: true, fields: ['email'] }]
-        //     }
-        // }
     }
 }
 
@@ -151,6 +112,7 @@ const User = Sequelize.define('User',
     options,
     hooks
 );
+
 oTm(Media, User, 'MediaId')
 
 function oTm(A, B, as) {
@@ -194,3 +156,90 @@ function oTm(A, B, as) {
 
 module.exports = User
 
+
+
+
+// const options = {
+//     id: {
+//         type: sequelize.UUID,
+//         defaultValue: sequelize.UUIDV4,
+//         primaryKey: true
+//     },
+//     email: {
+//         type: sequelize.STRING,
+//         allowNull: false
+//     },
+//     Name: {
+//         type: sequelize.STRING,
+//         allowNull: false
+//     },
+//     password: {
+//         type: sequelize.STRING,
+//         allowNull: false
+//     },
+//     DOB: {
+//         type: sequelize.STRING,
+//         allowNull: false
+//     },
+//     PhoneNo: {
+//         type: sequelize.STRING,
+
+//     },
+//     TotalPost: {
+//         type: sequelize.INTEGER,
+//         defaultValue: 0
+//     },
+//     TotalBiding: {
+//         type: sequelize.INTEGER,
+//         defaultValue: 0
+//     },
+//     Status: {
+//         type: sequelize.BOOLEAN,
+//         defaultValue: false
+//     },
+//     wallet: {
+//         type: sequelize.INTEGER,
+//         defaultValue: 0
+//     },
+
+//     rating: {
+//         type: sequelize.INTEGER,
+//         defaultValue: 0
+//     },
+//     parentId: {
+//         type: sequelize.UUID,
+//         allowNull: true,
+//     },
+//     username: {
+//         type: sequelize.STRING,
+//         allowNull: false,
+//         unique: true,
+//     },
+//     balance: {
+//         type: sequelize.INTEGER,
+//         allowNull: false,
+//         defaultValue: 0
+//     },
+//     expireOn: {
+//         type: sequelize.INTEGER,
+//         allowNull: true,
+//     },
+//     quota: {
+//         type: sequelize.INTEGER,
+//     },
+//     referralId: {
+//         type: sequelize.UUID,
+//         defaultValue: sequelize.UUIDV4,
+
+//     },
+//     sellerId: {
+//         type: sequelize.UUID,
+//         defaultValue: sequelize.UUIDV4,
+//     },
+//     verified: {
+//         type: sequelize.BOOLEAN,
+//         defaultValue: false,
+//     }
+
+
+// }
