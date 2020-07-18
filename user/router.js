@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const LanguageMiddleware = require('../Language/middleware/selectLanguage').selectLanguageById
 
 const Controller = require('./controller');
 
@@ -17,10 +18,10 @@ const DashboardRouter = require('./dashboard/dashboard.router')
 router.param('userId', Controller.getUserById)
 
 router.post('/add', Controller.add);
-router.post('/edit/:userid', Controller.edit);
+router.post('/edit/:userId', Controller.edit);
 router.post('/delete/:userId', Controller.delete);
 router.post('/status/:userId', Controller.updateStatus);
-router.get('/get',  Controller.get);
+router.post('/get', LanguageMiddleware, Controller.get);
 
 
 // Transaction Key

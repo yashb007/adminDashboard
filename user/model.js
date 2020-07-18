@@ -58,12 +58,7 @@ const options = {
         type: sequelize.UUID,
         allowNull: true,
     },
-    username_en: {
-        type: sequelize.STRING,
-        allowNull: false,
-        unique: true,
-    },
-    username_ar: {
+    username: {
         type: sequelize.STRING,
         allowNull: false,
         unique: true,
@@ -73,7 +68,7 @@ const options = {
         allowNull: false,
         defaultValue: 0
     },
-    overallEarning : {
+    overallEarning: {
         type: sequelize.INTEGER,
         allowNull: false,
         defaultValue: 0
@@ -100,17 +95,23 @@ const options = {
     }
 }
 
-const hooks = {
+const hook = {
     indexes: [{ unique: true, fields: ['email'] }],
+    hooks: {
+        // indexes: [{ unique: true, fields: ['email'] }],
 
-    beforeCreate: (record, options) => {
-        record.dataValues.password = bcrypt.hashSync(record.dataValues.password, 0)
+        beforeCreate: (record, options) => {
+            record.dataValues.password = bcrypt.hashSync(record.dataValues.password, 0)
+        },
+
+        beforeUpdate: (record, options) => {
+            record.dataValues.password = bcrypt.hashSync(record.dataValues.password, 0)
+        }
     }
 }
-
 const User = Sequelize.define('User',
     options,
-    hooks
+    hook
 );
 
 oTm(Media, User, 'MediaId')

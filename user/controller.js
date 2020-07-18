@@ -7,6 +7,14 @@ exports.getUserById = (req, res, next, id) => {
         User.findOne({
             where: {
                 id: id
+            },
+            attributes: {
+                include: [
+                    ['name_en', 'name']
+                ],
+                exclude: [
+                    'name_en'
+                ]
             }
         }).then(user => {
             if (!user) {
@@ -30,7 +38,8 @@ exports.add = async (req, res) => {
         const _b = req.body;
         let creator = {
             email: _b.email,
-            Name: _b.Name,
+            name_en: _b.name_en,
+            name_ar: _b.name_ar,
             DOB: _b.DOB,
             PhoneNo: _b.PhoneNo,
             password: _b.password,
@@ -49,10 +58,9 @@ exports.add = async (req, res) => {
                     if (v == null) {
                         throw new Error("Parent not found")
                     }
-                    
+
                     return _b.parentId
                 })
-
         }
 
         User.create(creator)
@@ -65,30 +73,39 @@ exports.add = async (req, res) => {
             });
     } catch (err) {
         console.error(err);
-        res.status(400).json({ error: err.message,status: false });
+        res.status(400).json({ error: err.message, status: false });
     }
 };
 
 exports.edit = (req, res) => {
     try {
         const _b = req.body;
-        User.update({
-            email: _b.email,
-            Name: _b.Name,
-            DOB : _b.DOB,
-            PhoneNo:_b.PhoneNo,
-            password: bcrypt.hashSync(_b.password, 0)
+        User.findOne({
+            where: {
+                id: req.params.userId
+            }
         })
-            .then(u => {
-                res.status(200).json({status: true});
+        .then(user => {
+            user.update({
+                email: _b.email,
+                name_en: _b.name_en,
+                name_ar: _b.name_ar,
+                DOB: _b.DOB,
+                PhoneNo: _b.PhoneNo,
+                // password: bcrypt.hashSync(_b.password, 0)
+                password: _b.password
             })
-            .catch(err => {
-                console.error(err);
-                res.status(400).json({status: false});
-            });
+                .then(u => {
+                    res.status(200).json({ status: true });
+                })
+                .catch(err => {
+                    console.error(err);
+                    res.status(400).json({ status: false });
+                });
+        })
     } catch (err) {
         console.error(err);
-        res.status(400).json({status: false});
+        res.status(400).json({ status: false });
     }
 };
 
@@ -113,11 +130,12 @@ exports.delete = (req, res) => {
 
 exports.get = (req, res) => {
     const _b = req.body;
+    const langCode = req.LanguageCode
 
-    const opts = { where: {}, attributes: { exclude: ['password'] } };
+    const opts = { where: {}, attributes: { exclude: ['password', `name_en`, `name_ar`], include: [[`name_${langCode}`, 'name']] } };
     if (+_b.offset) opts.offset = +_b.offset;
     if (+_b.limit) opts.limit = +_b.limit;
-    if (_b.keyword) opts.where.userName = { [sequelize.Op.like]: `%${_b.keyword}%` };
+    if (_b.keyword) opts.where.username = { [sequelize.Op.like]: `%${_b.keyword}%` };
 
     User.findAll(opts)
         .then(u => {
