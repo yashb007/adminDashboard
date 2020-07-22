@@ -3,6 +3,8 @@ const Sequelize = require('../services/sequelize.service').connection();
 const Media = require('../media/model')
 const  Language = require('../Language/model')
 const Category = require('../category/model') 
+const Brand = require('../Brand/model') 
+const Product = require('../Product/model') 
 
 const Post = Sequelize.define('Post',
     {
@@ -51,11 +53,13 @@ const Post = Sequelize.define('Post',
     {
         indexes: [{unique: true, fields: ['Title']}]
     }
-);
+ );
 
 oTm(Language, Post);
 oTm(Media, Post);
 oTm(Category, Post);
+oTm(Brand, Post);
+oTm(Product, Post);
 
 module.exports = Post;
 

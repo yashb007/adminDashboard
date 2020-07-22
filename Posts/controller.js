@@ -11,7 +11,7 @@ exports.getPostById = (req,res,next,id) => {
             where :{
                 id : id
             }
-        }).then(Ppst => {
+        }).then(post => {
             if(!post){
                 return res.status(400).json({  
                     error : "No Post found in db"
@@ -40,7 +40,9 @@ exports.add = (req, res) => {
           completionTime:_b.completionTime,
           LanguageId:_b.LanguageId,
           MediumId:_b.MediumId,
-          CategoryId:_b.CategoryId
+          CategoryId:_b.CategoryId,
+          BrandId:_b.BrandId,
+          ProductId:_b.ProductId
         })
             .then(u => {
                 res.status(200).json({status: true});
@@ -67,8 +69,13 @@ exports.edit = (req, res) => {
             completionTime:_b.completionTime,
             LanguageId:_b.LanguageId,
             MediumId:_b.MediumId,
-            CategoryId:_b.CategoryId
-        })
+            CategoryId:_b.CategoryId,
+            BrandId:_b.BrandId,
+            ProductId:_b.ProductId
+        },{
+            where : {
+            id : req.profile.id
+        }})
             .then(u => {
                 res.status(200).json({status: true});
             })
