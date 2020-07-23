@@ -74,7 +74,7 @@ exports.delete = (req,res) => {
     const _b = req.body
     try {
         Currency.destroy({
-            where: {Name: req.profile.Name}
+            where: {id : req.profile.id}
         })
             .then(u => {
                 res.status(200).json({status: true});
