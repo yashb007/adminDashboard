@@ -118,3 +118,16 @@ exports.get = (req,res) => {
 
 
     
+exports.updateStatus= (req,res) => {
+    Country.update({
+        Status: !req.profile.Status
+    },{
+        where: {id : req.profile.id}
+    }).then(u => {
+        res.status(200).json({status: true, data: u});
+    })
+    .catch(err => {
+        console.error(err);
+        res.status(400).json({status: false});
+    });
+}
