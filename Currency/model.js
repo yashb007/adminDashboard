@@ -8,7 +8,7 @@ const Currency = Sequelize.define('Currency',
             primaryKey: true
         },
         Currency: {
-            type: sequelize.INTEGER,
+            type: sequelize.STRING,
             allowNull: false
         },
         Coins:{
