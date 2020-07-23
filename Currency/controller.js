@@ -119,7 +119,7 @@ exports.get = (req,res) => {
 
     
 exports.updateStatus= (req,res) => {
-    Country.update({
+    Currency.update({
         Status: !req.profile.Status
     },{
         where: {id : req.profile.id}
