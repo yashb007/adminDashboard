@@ -28,6 +28,7 @@ app.use('/media', require('./media/router'));
 app.use('/brand', require('./Brand/router'));
 app.use('/privacy', require('./Privacy/router'));
 app.use('/terms', require('./Terms/router'));
+app.use('/currency', require('./Currency/router'));
 
 const port = process.env.port || 8029;
 app.listen(port ,()=> {
