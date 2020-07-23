@@ -62,11 +62,11 @@ exports.edit = (req, res) => {
             })
             .catch(err => {
                 console.error(err);
-                res.status(400).json({status: false});
+                res.status(400).json({status: false,error : err});
             });
     } catch (err) {
         console.error(err);
-        res.status(400).json({status: false});
+        res.status(400).json({status: false,error : err});
     }
 };
 
@@ -81,11 +81,11 @@ exports.delete = (req,res) => {
             })
             .catch(err => {
                 console.error(err);
-                res.status(400).json({status: false});
+                res.status(400).json({status: false,error : err});
             });
     } catch (err) {
         console.error(err);
-        res.status(400).json({status: false});
+        res.status(400).json({status: false,error : err});
     }
 };
 
