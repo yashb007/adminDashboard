@@ -14,6 +14,10 @@ const Currency = Sequelize.define('Currency',
         Coins:{
             type: sequelize.INTEGER ,
             allowNull: false
+        },
+        Status:{
+            type:sequelize.BOOLEAN,
+            defaultValue:false
         }
 
     },
