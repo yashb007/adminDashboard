@@ -1,3 +1,4 @@
+
 const Sequelize = require('../services/sequelize.service').connection();
 const sequelize = require('sequelize');
 const Language = require('../Language/model')
@@ -11,28 +12,40 @@ const Category = Sequelize.define('Category', {
     name: {
         type: sequelize.STRING
     },
-    Status: {
-        type: sequelize.BOOLEAN,
-        defaultValue: false
+    Status:{
+        type:sequelize.BOOLEAN,
+        defaultValue:false
     },
-    ParentId: {
+    ParentId:{
         type: sequelize.STRING,
-        defaultValue: "0"
+        defaultValue:"0"    
     }
 
 }, {
-    indexes: [{ unique: true, fields: ['name'] }]
+    indexes: [{unique: true, fields: ['name']}]
 });
 
 
-Category.belongsTo(Language, { constraints: true, onDelete: 'CASCADE' });
 Language.hasMany(Category);
+Category.belongsTo(Language);
 
 Category.hasMany(Category);
-Category.belongsToMany(Category, { as: 'parent', foreignKey: 'ParentId' });
+Category.belongsToMany(Category, {as: 'parent', through: 'ParentId'});
 
 
-Media.hasMany(Category);
-Category.belongsToMany(Media, { foreignKey: 'MediaId' });
+Media.hasMany(Category, {foreignKey: 'MediaId'});
+Category.belongsTo(Media, {foreignKey: 'MediaId'});
 
 module.exports = Category;
+
+// Category.belongsTo(Language, { constraints: true, onDelete: 'CASCADE' });
+// Language.hasMany(Category);
+
+// Category.hasMany(Category);
+// Category.belongsToMany(Category, { as: 'parent', foreignKey: 'ParentId' });
+
+
+// Media.hasMany(Category);
+// Category.belongsToMany(Media, { foreignKey: 'MediaId' });
+
+// module.exports = Category;
