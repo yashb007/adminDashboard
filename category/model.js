@@ -38,7 +38,7 @@ const Category = Sequelize.define('Category', {
 
 // module.exports = Category;
 
-Category.belongsTo(Language, { constraints: true, onDelete: 'CASCADE' });
+Category.belongsTo(Language, { constraints: true, onDelete: 'CASCADE', through :'LanguageId' });
 Language.hasMany(Category);
 
 Category.hasMany(Category);
