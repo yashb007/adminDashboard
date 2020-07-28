@@ -34,8 +34,8 @@ exports.add = (req, res) => {
         Category.create({
           name:_b.name,
           LanguageId:_b.LanguageId,
-          ParentId:_b.ParentId,
-          MediaId:_b.MediaId
+          CategoryId:_b.CategoryId,
+         // MediaId:_b.MediaId
         })
             .then(u => {
                 res.status(200).json({status: true});
@@ -55,10 +55,7 @@ exports.edit = (req, res) => {
     try {
         const _b = req.body;
         Category.update({
-          name:_b.name,
-          LanguageId:_b.LanguageId,
-          ParentId:_b.ParentId,
-          MediaId:_b.MediaId
+          name:_b.name
         })
             .then(u => {
                 res.status(200).json({status: true});

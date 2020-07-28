@@ -3,7 +3,7 @@ const Sequelize = require('../services/sequelize.service').connection();
 const sequelize = require('sequelize');
 const Language = require('../Language/model')
 const Media = require('../media/model')
-const Category = Sequelize.define('Category', {
+const SubCategory = Sequelize.define('SubCategory', {
     id: {
         type: sequelize.UUID,
         defaultValue: sequelize.UUIDV4,
@@ -15,10 +15,6 @@ const Category = Sequelize.define('Category', {
     Status:{
         type:sequelize.BOOLEAN,
         defaultValue:false
-    },
-    ParentId:{
-        type: sequelize.STRING,
-        defaultValue:"0"    
     }
 
 }, {
@@ -29,8 +25,8 @@ const Category = Sequelize.define('Category', {
 Language.hasMany(Category);
 Category.belongsTo(Language);
 
-Category.hasMany(Category, {as: 'child', foreignKey: 'ParentId'});
-Category.belongsTo(Category, {as: 'parent', foreignKey: 'ParentId'});
+Category.hasMany(Category, {as: 'child', foreignKey: 'CategoryId'});
+Category.belongsTo(Category, {as: 'parent', foreignKey: 'ParentCategoryId'});
 
 
 Media.hasMany(Category, {foreignKey: 'MediaId'});
