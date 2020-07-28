@@ -24,7 +24,7 @@ exports.getCategoryById = (req,res,next,id) => {
     }
     catch(err) {
         console.error(err);
-        res.status(400).json({status: false});
+        res.status(400).json({status: false, error : err});
     }
 };
 
@@ -42,11 +42,11 @@ exports.add = (req, res) => {
             })
             .catch(err => {
                 console.error(err);
-                res.status(400).json({status: false});
+                res.status(400).json({status: false, error : err});
             });
     } catch (err) {
         console.error(err);
-        res.status(400).json({status: false});
+        res.status(400).json({status: false, error : err});
     }
 };
 
@@ -65,11 +65,11 @@ exports.edit = (req, res) => {
             })
             .catch(err => {
                 console.error(err);
-                res.status(400).json({status: false});
+                res.status(400).json({status: false, error : err});
             });
     } catch (err) {
         console.error(err);
-        res.status(400).json({status: false});
+        res.status(400).json({status: false, error : err});
     }
 };
 
@@ -87,11 +87,11 @@ exports.delete = (req,res) => {
             })
             .catch(err => {
                 console.error(err);
-                res.status(400).json({status: false});
+                res.status(400).json({status: false, error : err});
             });
     } catch (err) {
         console.error(err);
-        res.status(400).json({status: false});
+        res.status(400).json({status: false, error : err});
     }
 };
 
@@ -118,7 +118,7 @@ exports.get = (req,res) => {
         })
         .catch(err => {
             console.error(err);
-            res.status(400).json({status: false});
+            res.status(400).json({status: false, error : err});
         });
     }    
 
@@ -134,6 +134,6 @@ exports.updateStatus= (req,res) => {
         })
         .catch(err => {
             console.error(err);
-            res.status(400).json({status: false});
+            res.status(400).json({status: false, error : err});
         });
     }
