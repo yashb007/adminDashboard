@@ -1,23 +1,23 @@
-const bcrypt = require('bcrypt');
 const sequelize = require('sequelize');
-const Language = require('./model');
+const Category = require('./model');
 const Config = require('../enviornment/index');
+const Media = require('../media/model')
+const Language = require('../Language/model')
 
 
-
-exports.getLangById = (req,res,next,id) => {
+exports.getCategoryById = (req,res,next,id) => {
     try{
-        Language.findOne({
+        Category.findOne({
             where :{
                 id : id
             }
-        }).then(lang => {
-            if(!lang){
+        }).then(category => {
+            if(!category){
                 return res.status(400).json({  
-                    error : "No language found in db"
+                    error : "No Category found in db"
                 })
             }
-            req.profile = lang;
+            req.profile = category;
             
             next();
         })
@@ -31,9 +31,11 @@ exports.getLangById = (req,res,next,id) => {
 exports.add = (req, res) => {
     try {
         const _b = req.body;
-        Language.create({
-            Name: _b.Name,
-            LanguageCode:_b.LanguageCode
+        Category.create({
+          name:_b.name,
+          LanguageId:_b.LanguageId,
+          CategoryId:_b.CategoryId,
+         // MediaId:_b.MediaId
         })
             .then(u => {
                 res.status(200).json({status: true});
@@ -52,13 +54,9 @@ exports.add = (req, res) => {
 exports.edit = (req, res) => {
     try {
         const _b = req.body;
-        Language.update({
-            Name: _b.Name,
-            LanguageCode:_b.LanguageCode
-        },{
-            where : {
-            id : req.profile.id
-        }})
+        Category.update({
+          name:_b.name
+        })
             .then(u => {
                 res.status(200).json({status: true});
             })
@@ -72,11 +70,14 @@ exports.edit = (req, res) => {
     }
 };
 
+
 exports.delete = (req,res) => {
     const _b = req.body
     try {
-        Language.destroy({
-            where: {LanguageCode: req.profile.LanguageCode}
+        Category.destroy({
+            where: {
+                 name:req.profile.name
+                }
         })
             .then(u => {
                 res.status(200).json({status: true});
@@ -96,18 +97,21 @@ exports.get = (req,res) => {
     const opts = {where: {}, attributes: {}};
     if (+_b.offset) opts.offset = +_b.offset;
     if (+_b.limit) opts.limit = +_b.limit;
-    if (_b.keyword) opts.where.Name = {[sequelize.Op.like]: `%${_b.keyword}%`};
+    if (_b.keyword) opts.where.name = {[sequelize.Op.like]: `%${_b.keyword}%`};
 
-    Language.findAll(opts)
+    Category.findAll(opts)
         .then(u => {
             if (!u) {
-             return   res.status(400).json({
+                res.status(400).json({
                     status: false,
-                    message: 'Lang not found'
+                    message: 'Category not found'
                 });
-            } 
-                res.json({data:u,status:true})
-            
+            } else {
+                res.status(200).json({
+                    status: true,
+                    data: u
+                });
+            }
         })
         .catch(err => {
             console.error(err);
@@ -115,12 +119,12 @@ exports.get = (req,res) => {
         });
     }    
 
-    exports.updateStatus= (req,res) => {
-        Language.update({
+exports.updateStatus= (req,res) => {
+        Category.update({
             Status: !req.profile.Status
         },{
             where:{
-                LanguageCode: req.profile.LanguageCode
+                name:req.profile.name
             }
         }).then(u => {
             res.status(200).json({status: true, data: u});

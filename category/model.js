@@ -15,6 +15,10 @@ const Category = Sequelize.define('Category', {
     Status:{
         type:sequelize.BOOLEAN,
         defaultValue:false
+    },
+    ParentId:{
+        type: sequelize.STRING,
+        defaultValue:"0"    
     }
 
 }, {
@@ -22,14 +26,26 @@ const Category = Sequelize.define('Category', {
 });
 
 
+// Language.hasMany(Category);
+// Category.belongsTo(Language);
+
+// Category.hasMany(Category);
+// Category.belongsToMany(Category, {as: 'parent', through: 'ParentId'});
+
+
+// Media.hasMany(Category, {foreignKey: 'MediaId'});
+// Category.belongsTo(Media, {foreignKey: 'MediaId'});
+
+// module.exports = Category;
+
+Category.belongsTo(Language, { constraints: true, onDelete: 'CASCADE', through :'LanguageId', foreignKey: 'LanguageId' });
 Language.hasMany(Category);
-Category.belongsTo(Language);
 
-Category.hasMany(Category, {as: 'child', foreignKey: 'CategoryId'});
-Category.belongsTo(Category, {as: 'parent', foreignKey: 'CategoryId'});
+Category.hasMany(Category);
+Category.belongsToMany(Category, { as: 'parent', through:'ParentId', foreignKey: 'ParentId' });
 
 
-Media.hasMany(Category, {foreignKey: 'MediaId'});
-Category.belongsTo(Media, {foreignKey: 'MediaId'});
+Media.hasMany(Category);
+Category.belongsToMany(Media, { foreignKey: 'MediaId', through : 'MediaId' });
 
 module.exports = Category;

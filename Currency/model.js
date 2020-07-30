@@ -1,23 +1,17 @@
 const sequelize = require('sequelize');
 const Sequelize = require('../services/sequelize.service').connection();
-const Language = require('../Language/model')
-const Governorate = require('../Governorate/model')
-const Area = Sequelize.define('Area',
+const Currency = Sequelize.define('Currency',
     {
         id: {
             type: sequelize.UUID,
             defaultValue: sequelize.UUIDV4,
             primaryKey: true
         },
-        Name: {
+        Currency: {
             type: sequelize.STRING,
             allowNull: false
         },
-        AreaCode:{
-            type: sequelize.TEXT ,
-            allowNull: false
-        },
-        PinCode:{
+        Coins:{
             type: sequelize.INTEGER ,
             allowNull: false
         },
@@ -25,18 +19,12 @@ const Area = Sequelize.define('Area',
             type:sequelize.BOOLEAN,
             defaultValue:false
         }
-       
+
     },
     {
         indexes: [{unique: true, fields: ['Name']}]
     }
 );
 
-Governorate.hasMany(Area);
-Area.belongsTo(Governorate);
 
-
-Language.hasMany(Area);
-Area.belongsTo(Language);
-
-module.exports = Area;
+module.exports = Currency;

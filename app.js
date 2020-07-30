@@ -27,6 +27,9 @@ app.use('/category', require('./category/router'));
 app.use('/product', require('./Product/router'));
 app.use('/media', require('./media/router'));
 app.use('/brand', require('./Brand/router'));
+app.use('/privacy', require('./Privacy/router'));
+app.use('/terms', require('./Terms/router'));
+app.use('/currency', require('./Currency/router'));
 
 // app.get('*', (req, res) => res.json({working: "fine"}))
 

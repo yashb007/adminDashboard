@@ -36,16 +36,16 @@ exports.add = (req, res) => {
           LanguageId:_b.LanguageId,
           MediumId:_b.MediumId
         })
-            .then(u => {
+        .then(u => {
                 res.status(200).json({status: true});
             })
             .catch(err => {
                 console.error(err);
-                res.status(400).json({status: false});
+                res.status(400).json({status: false,error : err});
             });
     } catch (err) {
         console.error(err);
-        res.status(400).json({status: false});
+        res.status(400).json({status: false, error : err});
     }
 };
 

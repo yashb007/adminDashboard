@@ -24,7 +24,7 @@ exports.getCategoryById = (req,res,next,id) => {
     }
     catch(err) {
         console.error(err);
-        res.status(400).json({status: false});
+        res.status(400).json({status: false, error : err});
     }
 };
 
@@ -34,19 +34,19 @@ exports.add = (req, res) => {
         Category.create({
           name:_b.name,
           LanguageId:_b.LanguageId,
-          CategoryId:_b.CategoryId,
-         // MediaId:_b.MediaId
+          ParentId:_b.ParentId,
+          MediaId:_b.MediaId
         })
             .then(u => {
                 res.status(200).json({status: true});
             })
             .catch(err => {
                 console.error(err);
-                res.status(400).json({status: false});
+                res.status(400).json({status: false, error : err});
             });
     } catch (err) {
         console.error(err);
-        res.status(400).json({status: false});
+        res.status(400).json({status: false, error : err});
     }
 };
 
@@ -55,18 +55,21 @@ exports.edit = (req, res) => {
     try {
         const _b = req.body;
         Category.update({
-          name:_b.name
+          name:_b.name,
+          LanguageId:_b.LanguageId,
+          ParentId:_b.ParentId,
+          MediaId:_b.MediaId
         })
             .then(u => {
                 res.status(200).json({status: true});
             })
             .catch(err => {
                 console.error(err);
-                res.status(400).json({status: false});
+                res.status(400).json({status: false, error : err});
             });
     } catch (err) {
         console.error(err);
-        res.status(400).json({status: false});
+        res.status(400).json({status: false, error : err});
     }
 };
 
@@ -84,11 +87,11 @@ exports.delete = (req,res) => {
             })
             .catch(err => {
                 console.error(err);
-                res.status(400).json({status: false});
+                res.status(400).json({status: false, error : err});
             });
     } catch (err) {
         console.error(err);
-        res.status(400).json({status: false});
+        res.status(400).json({status: false, error : err});
     }
 };
 
@@ -115,7 +118,7 @@ exports.get = (req,res) => {
         })
         .catch(err => {
             console.error(err);
-            res.status(400).json({status: false});
+            res.status(400).json({status: false, error : err});
         });
     }    
 
@@ -131,6 +134,6 @@ exports.updateStatus= (req,res) => {
         })
         .catch(err => {
             console.error(err);
-            res.status(400).json({status: false});
+            res.status(400).json({status: false, error : err});
         });
     }
