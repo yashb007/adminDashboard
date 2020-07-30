@@ -31,17 +31,21 @@ const options = {
 
     time: {
         type: sequelize.INTEGER
-    }
+    },
 
-    
+    transactionType: {
+        type: sequelize.CHAR,
+    }
 }
 
 const hooks = {
     hooks: {
         beforeCreate: (record, options) => {
-            console.log(moment().unix())
-            console.log(moment.unix())
             record.dataValues.time = moment().unix()
+
+            if (record.dataValues.coinsEarned > 0) record.dataValues.transactionType = '+'
+            else if (record.dataValues.coinsEarned === 0) record.dataValues.transactionType = '0'
+            else record.dataValues.transactionType = '-'
         }
     }
 }
