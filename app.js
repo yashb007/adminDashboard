@@ -31,7 +31,9 @@ app.use('/privacy', require('./Privacy/router'));
 app.use('/terms', require('./Terms/router'));
 app.use('/currency', require('./Currency/router'));
 
-// app.get('*', (req, res) => res.json({working: "fine"}))
+app.get('*', (req, res) => res.json({working: "fine"}))
+app.post('*', (req, res) => res.json({working: "fine"}))
+
 
 const port = process.env.port || 8029;
 app.listen(port ,()=> {
