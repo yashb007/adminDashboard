@@ -14,7 +14,7 @@ const Area = Sequelize.define('Area',
             allowNull: false
         },
         AreaCode:{
-            type: sequelize.TEXT ,
+            type: sequelize.INTEGER ,
             allowNull: false
         },
         PinCode:{
