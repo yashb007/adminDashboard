@@ -93,11 +93,11 @@ exports.delete = (req,res) => {
 
 exports.get = (req,res) => {
     const _b = req.body;
-    const opts = {where: {}, attributes: {}};
-    if (+_b.offset) opts.offset = +_b.offset;
-    if (+_b.limit) opts.limit = +_b.limit;
-    if (_b.keyword) opts.where.Name = {[sequelize.Op.like]: `%${_b.keyword}%`};
-
+    const opts = {where: {id : id}, attributes: {}};
+    if (_b.languageId) opts.where.id = _b.languageId;
+    if (+_b.startRange) opts.offset = +_b.startRange;
+    if (+_b.count) opts.limit = +_b.count;
+    if (_b.keyword) opts.where.name = {[sequelize.Op.like]: `%${_b.keyword}%`};
     Language.findAll(opts)
         .then(u => {
             if (!u) {
