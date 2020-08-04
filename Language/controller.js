@@ -93,7 +93,7 @@ exports.delete = (req,res) => {
 
 exports.get = (req,res) => {
     const _b = req.body;
-    const opts = {where: {id : id}, attributes: {}};
+    const opts = {where: {}, attributes: {}};
     if (_b.languageId) opts.where.id = _b.languageId;
     if (+_b.startRange) opts.offset = +_b.startRange;
     if (+_b.count) opts.limit = +_b.count;
