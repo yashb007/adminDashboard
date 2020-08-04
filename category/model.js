@@ -46,6 +46,6 @@ Category.belongsToMany(Category, { as: 'parent', through:'ParentId', foreignKey:
 
 
 Media.hasMany(Category);
-Category.belongsToMany(Media);
+Category.belongsToMany(Media, {  through : 'MediaId' });
 
 module.exports = Category;
