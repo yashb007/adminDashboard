@@ -31,7 +31,7 @@ Category.belongsTo(Language, { constraints: true, onDelete: 'CASCADE', through :
 Language.hasMany(Category);
 
 Category.hasMany(Category);
-Category.belongsToMany(Category, { as: 'parent',  foreignKey: 'ParentId' });
+Category.belongsTo(Category, { as: 'parent',  foreignKey: 'ParentId' });
 
 
 Media.hasMany(Category);
