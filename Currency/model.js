@@ -22,7 +22,7 @@ const Currency = Sequelize.define('Currency',
 
     },
     {
-        indexes: [{unique: true, fields: ['Name']}]
+        indexes: [{unique: true, fields: ['Currency']}]
     }
 );
 
