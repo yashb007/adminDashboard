@@ -1,5 +1,6 @@
 const sequelize = require('sequelize');
 const Sequelize = require('../services/sequelize.service').connection();
+console.log("Connection for currency")
 const Currency = Sequelize.define('Currency',
     {
         id: {

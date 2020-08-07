@@ -3,9 +3,9 @@ const sequelize = require("sequelize");
 
 let Sequelize;
 
-exports.init = () => {
+exports.init =  () => {
 
-    Sequelize = new sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
+    Sequelize =  new  sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
         define: {
             charset: 'utf8mb4'
         },
@@ -21,7 +21,7 @@ exports.init = () => {
     });
 
     Sequelize.sync({alter: false, force: false});
-
+    
 }
 
 exports.connection = () => Sequelize;

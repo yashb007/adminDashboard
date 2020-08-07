@@ -4,7 +4,13 @@ const express = require('express')
 const app = express();
 const cors = require("cors");
 app.use(cors());
+try{
 require('./services/sequelize.service').init();
+console.log(" connected")
+}
+catch{
+    console.log("not connect")
+}
 require('./services/passport.services')();
 app.use(express.json());
 app.use(express.static(__dirname))
