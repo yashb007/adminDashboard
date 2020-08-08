@@ -9,6 +9,6 @@ router.post('/add', Controller.add);
 router.post('/delete/:areaId', Controller.delete);
 router.post('/edit/:areaId', Controller.edit);
 router.post('/status/:areaId', Controller.updateStatus);
-router.get('/get',  Controller.get);
+router.post('/get',  Controller.get);
 
 module.exports = router;
