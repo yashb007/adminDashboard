@@ -95,7 +95,6 @@ exports.get = (req,res) => {
     const _b = req.body;
     const opts = {where: {}, attributes: {}};
     if (_b.languageId) opts.where.languageId = _b.languageId;
-    if (_b.languageId) opts.where.id = _b.offerId;
     if (_b.offerId) opts.where.id = _b.offerId;
     if (+_b.offset) opts.offset = +_b.offset;
     if (+_b.limit) opts.limit = +_b.limit;
