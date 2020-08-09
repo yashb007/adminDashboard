@@ -140,6 +140,37 @@ exports.get = (req, res) => {
 }
 
 
+exports.getWallet = (req, res) => {
+    const _b = req.body;
+
+    const opts = { where: {}, attributes: { exclude: ['password'] } };
+    if (+_b.offset) opts.offset = +_b.offset;
+    if (+_b.limit) opts.limit = +_b.limit;
+    if (_b.keyword) opts.where.userName = { [sequelize.Op.like]: `%${_b.keyword}%` };
+
+    User.findAll({where :{
+        id: req.profile.id
+    } })
+        .then(u => {
+            if (!u) {
+                res.status(400).json({
+                    status: false,
+                    message: 'user not found'
+                });
+            } else {
+                res.status(200).json({
+                    status: true,
+                    data: u.wallet
+                });
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(400).json({ status: false });
+        });
+}
+
+
 exports.updateStatus = (req, res) => {
     User.update({
         Status: !req.profile.Status
