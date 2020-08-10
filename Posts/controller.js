@@ -111,6 +111,10 @@ exports.delete = (req,res) => {
 exports.get = (req,res) => {
     const _b = req.body;
     const opts = {where: {}, attributes: {}};
+    if (_b.languageId) opts.where.languageId = _b.languageId;
+    if (_b.PostId) opts.where.id = _b.PostId;
+    if (_b.placeForBidding) opts.where.id = _b.placeForBidding;
+    if (_b.isNew) opts.where.id = _b.isNew;
     if (+_b.offset) opts.offset = +_b.offset;
     if (+_b.limit) opts.limit = +_b.limit;
     if (_b.keyword) opts.where.Title = {[sequelize.Op.like]: `%${_b.keyword}%`};
