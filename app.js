@@ -1,5 +1,6 @@
 // require('dotenv').config()
 const express = require('express')
+console.log("here")
 
 const app = express();
 const cors = require("cors");
@@ -39,6 +40,7 @@ app.post('*', (req, res) => res.json({ working: "fine" }))
 
 
 const port = process.env.port || 8029;
+console.log(port)
 
     sequelize.connection()
         .authenticate()
