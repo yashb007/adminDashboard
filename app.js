@@ -5,6 +5,9 @@ const app = express();
 const cors = require("cors");
 app.use(cors());
 
+const sequelize = require('./services/sequelize.service');
+sequelize.connect()
+
 require('./services/passport.services')();
 app.use(express.json());
 app.use(express.static(__dirname))
@@ -48,7 +51,7 @@ const port = process.env.port || 8029;
                 console.log(`Server is running at ${port}`)
             })
         })
-        .catch(err => console.err(err))
+        .catch(err => console.error(err))
 
 module.exports = app
 
