@@ -4,7 +4,9 @@ const express = require('express')
 const app = express();
 const cors = require("cors");
 app.use(cors());
-require('./services/sequelize.service').init();
+const sequelize = require('./services/sequelize.service');
+sequelize.connect()
+
 require('./services/passport.services')();
 app.use(express.json());
 app.use(express.static(__dirname))
@@ -31,11 +33,25 @@ app.use('/privacy', require('./Privacy/router'));
 app.use('/terms', require('./Terms/router'));
 app.use('/currency', require('./Currency/router'));
 
-app.get('*', (req, res) => res.json({working: "fine"}))
-app.post('*', (req, res) => res.json({working: "fine"}))
+app.get('*', (req, res) => res.json({ working: "fine" }))
+app.post('*', (req, res) => res.json({ working: "fine" }))
 
 
 const port = process.env.port || 8029;
-app.listen(port ,()=> {
-    console.log(`Server is running at ${port}`)
-})
+
+    sequelize.connection()
+        .authenticate()
+        .then(() => {
+            return sequelize.connection().sync({alter: true, force: false})
+        })
+        .then(() => {
+            console.log(process.versions)
+            app.listen(port, () => {
+                console.log(`Server is running at ${port}`)
+            })
+        })
+        .catch(err => console.err(err))
+
+module.exports = app
+
+
