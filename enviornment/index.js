@@ -5,7 +5,7 @@ module.exports = {
         USER: "root",
         PASSWORD: "Admin@1234",
         // PASSWORD: "root",
-        DB: "Admin_s",
+        DB: "SoldiumNew",
         dialect: "mysql",
         pool: {
             max: 5,
