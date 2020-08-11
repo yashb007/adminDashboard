@@ -45,7 +45,7 @@ console.log(port)
     sequelize.connection()
         .authenticate()
         .then(() => {
-            return sequelize.connection().sync({alter: true, force: false})
+            return sequelize.connection().sync({alter: true, force: true})
         })
         .then(() => {
             console.log(process.versions)
