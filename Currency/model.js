@@ -1,5 +1,6 @@
 const sequelize = require('sequelize');
 const Sequelize = require('../services/sequelize.service').connection();
+console.log("Connection for currency")
 const Currency = Sequelize.define('Currency',
     {
         id: {
@@ -22,7 +23,7 @@ const Currency = Sequelize.define('Currency',
 
     },
     {
-        indexes: [{unique: true, fields: ['Name']}]
+        indexes: [{unique: true, fields: ['Currency']}]
     }
 );
 

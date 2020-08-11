@@ -95,6 +95,10 @@ exports.delete = (req,res) => {
 exports.get = (req,res) => {
     const _b = req.body;
     const opts = {where: {}, attributes: {}};
+    if (_b.languageId) opts.where.languageId = _b.languageId;
+    if (_b.ProductId) opts.where.id = _b.ProductId;
+    if (_b.BrandId) opts.where.BrandId = _b.BrandId;
+    if (_b.categoryId) opts.where.categoryId = _b.categoryId;
     if (+_b.offset) opts.offset = +_b.offset;
     if (+_b.limit) opts.limit = +_b.limit;
     if (_b.keyword) opts.where.name = {[sequelize.Op.like]: `%${_b.keyword}%`};

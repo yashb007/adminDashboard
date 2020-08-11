@@ -18,7 +18,9 @@ router.post('/add', Controller.add);
 router.post('/edit/:userid', Controller.edit);
 router.post('/delete/:userId', Controller.delete);
 router.post('/status/:userId', Controller.updateStatus);
-router.get('/get',  Controller.get);
+router.post('/get',  Controller.get);
+router.post('/getWallet',  Controller.getWallet);
+
 
 
 // Transaction Key

@@ -4,8 +4,6 @@ const express = require('express')
 const app = express();
 const cors = require("cors");
 app.use(cors());
-const sequelize = require('./services/sequelize.service');
-sequelize.connect()
 
 require('./services/passport.services')();
 app.use(express.json());

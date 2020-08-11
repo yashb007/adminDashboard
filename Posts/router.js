@@ -10,6 +10,6 @@ router.post('/delete/:postId', Controller.delete);
 router.post('/edit/:postId', Controller.edit);
 router.post('/status/:postId', Controller.updateStatus);
 router.post('/isNew/:postId', Controller.updateIsNew);
-router.get('/get',  Controller.get);
+router.post('/get',  Controller.get);
 
 module.exports = router;

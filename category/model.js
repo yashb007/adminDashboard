@@ -26,26 +26,15 @@ const Category = Sequelize.define('Category', {
 });
 
 
-// Language.hasMany(Category);
-// Category.belongsTo(Language);
-
-// Category.hasMany(Category);
-// Category.belongsToMany(Category, {as: 'parent', through: 'ParentId'});
-
-
-// Media.hasMany(Category, {foreignKey: 'MediaId'});
-// Category.belongsTo(Media, {foreignKey: 'MediaId'});
-
-// module.exports = Category;
 
 Category.belongsTo(Language, { constraints: true, onDelete: 'CASCADE', through :'LanguageId', foreignKey: 'LanguageId' });
 Language.hasMany(Category);
 
 Category.hasMany(Category);
-Category.belongsToMany(Category, { as: 'parent', through:'ParentId', foreignKey: 'ParentId' });
+Category.belongsTo(Category, { as: 'parent',  foreignKey: 'ParentId' });
 
 
 Media.hasMany(Category);
-Category.belongsToMany(Media, { foreignKey: 'MediaId', through : 'MediaId' });
+Category.belongsTo(Media);
 
 module.exports = Category;
