@@ -30,8 +30,8 @@ const Category = Sequelize.define('Category', {
 Category.belongsTo(Language, { constraints: true, onDelete: 'CASCADE', through :'LanguageId', foreignKey: 'LanguageId' });
 Language.hasMany(Category);
 
-Category.hasMany(Category);
-Category.belongsTo(Category, { as: 'parent',  foreignKey: 'ParentId' });
+// Category.hasMany(Category);
+// Category.belongsTo(Category, { as: 'parent',  foreignKey: 'ParentId' });
 
 
 Media.hasMany(Category);
