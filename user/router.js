@@ -19,7 +19,7 @@ router.post('/edit/:userid', Controller.edit);
 router.post('/delete/:userId', Controller.delete);
 router.post('/status/:userId', Controller.updateStatus);
 router.post('/get',  Controller.get);
-router.post('/getWallet',  Controller.getWallet);
+router.post('/getWallet/:userId',  Controller.getWallet);
 
 
 
