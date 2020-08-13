@@ -42,19 +42,19 @@ app.post('*', (req, res) => res.json({ working: "fine" }))
 const port = process.env.port || 8029;
 console.log(port)
 
-    sequelize.connection()
-        .authenticate()
-        .then(() => {
-            return sequelize.connection().sync()
-        })
-        .then(() => {
-           // console.log(process.versions)
+    // sequelize.connection()
+    //     .authenticate()
+    //     .then(() => {
+    //         return sequelize.connection().sync()
+    //     })
+    //     .then(() => {
+    //        // console.log(process.versions)
             app.listen(port, () => {
                 console.log(`Server is running at ${port}`)
             })
-        })
-        .catch(err => console.error(err))
+//         })
+//         .catch(err => console.error(err))
 
-module.exports = app
+// module.exports = app
 
 
