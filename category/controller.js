@@ -97,12 +97,11 @@ exports.delete = (req, res) => {
 exports.get = async (req, res) => {
   const _b = req.body;
   try {
-    const opts = { where: {}, attributes: {} };
-    if (+_b.offset) opts.offset = +_b.offset;
-    if (+_b.limit) opts.limit = +_b.limit;
-    if (_b.keyword)
-      opts.where.name = { [sequelize.Op.like]: `%${_b.keyword}%` };
-
+    const opts = { where: {} };
+    if (_b.categoryId) opts.where.id = _b.categoryId;
+    if (_b.LanguageId) opts.where.LanguageId = _b.LanguageId;
+    if (_b.ParentId) opts.where.ParentId = _b.ParentId;
+   
     let u = await Category.findAll(opts);
     if (!u) {
       res.status(400).json({
