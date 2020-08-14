@@ -56,9 +56,12 @@ exports.edit = (req, res) => {
       LanguageId: _b.LanguageId,
       ParentId: _b.ParentId,
       MediaId: _b.MediaId,
-    })
+    },{
+      where : {
+      id : req.profile.id
+  }})
       .then((u) => {
-        res.status(200).json({ status: true });
+        res.status(200).json({ status: true, data: u });
       })
       .catch((err) => {
         console.error(err);

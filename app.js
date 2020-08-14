@@ -48,11 +48,11 @@ console.log(port)
     //         return sequelize.connection().sync()
     //     })
     //     .then(() => {
-    //        // console.log(process.versions)
+      // console.log(process.versions)
             app.listen(port, () => {
                 console.log(`Server is running at ${port}`)
             })
-//         })
+     //   })
 //         .catch(err => console.error(err))
 
 // module.exports = app
